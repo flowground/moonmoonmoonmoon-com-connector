@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "tag": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

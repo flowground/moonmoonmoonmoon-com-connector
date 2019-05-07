@@ -1,0 +1,68 @@
+{
+    "title": "Moon by Ai Weiwei & Olafur Eliasson",
+    "description": "Turn nothing into something - make a drawing, make a mark.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/moonmoonmoonmoon.com/1.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "http://moonmoonmoonmoon.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Marks_hashtags": {
+            "main": "./lib/actions/Marks_hashtags.js",
+            "title": "Fetches popular hashtags or marks tagged with specified hashtag",
+            "description": "Search for specified tag (no pound sign necessary). If <b>tag</b> is empty, the 50 most popular hashtags will be returned.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Marks_hashtags.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Marks_index": {
+            "main": "./lib/actions/Marks_index.js",
+            "title": "Fetches marks",
+            "description": "The main method for querying the marks database. You may use the following options:\n        <ol style='list-style-type: lower-roman;'>\n        <li>No parameters to retrieve all marks in descending chronological order (use <b>before</b> for pagination)</li>\n        <li><b>popular</b> (and optionally <b>last_popular_id</b>) to retrieve all popular marks</li>\n        <li><b>featured</b> to retrieve all featured marks</li>\n        <li><b>x & y</b> to retrieve mark at specific coordinate</li>\n        <li><b>user</b> to retrieve all marks created by the specified user</li>\n        <li><b>collection</b> to retrieve all marks collected by the specified user</li>\n        </ol>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Marks_index.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
